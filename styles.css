@@ -1,0 +1,305 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 15% 18%, rgba(255, 241, 118, 0.95), rgba(255, 241, 118, 0.18) 12%, transparent 16%),
+    linear-gradient(180deg, #7dd3fc 0%, #bfe9ff 36%, #e0f7ff 55%, #47b8f0 56%, #1597d2 72%, #0b79b8 100%);
+  color: #0f3554;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  background:
+    radial-gradient(circle at 80% 14%, rgba(255, 255, 255, 0.9), transparent 10%),
+    radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.78), transparent 8%),
+    radial-gradient(circle at 88% 20%, rgba(255, 255, 255, 0.82), transparent 9%),
+    radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.88), transparent 9%),
+    radial-gradient(circle at 27% 20%, rgba(255, 255, 255, 0.76), transparent 8%);
+  opacity: 0.75;
+}
+
+body::after {
+  inset: auto 0 0;
+  height: 22vh;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0)),
+    radial-gradient(circle at 10% 0, rgba(255, 255, 255, 0.4), transparent 18%),
+    radial-gradient(circle at 38% 10%, rgba(255, 255, 255, 0.26), transparent 20%),
+    radial-gradient(circle at 72% 0, rgba(255, 255, 255, 0.28), transparent 18%);
+  opacity: 0.85;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+}
+
+.todo-card {
+  width: min(100%, 720px);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 28px;
+  padding: 28px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 24px 50px rgba(16, 92, 139, 0.2);
+}
+
+.hero {
+  margin-bottom: 24px;
+}
+
+.hero-badge {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.14);
+  color: #0369a1;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 44px);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  color: #4b7493;
+  line-height: 1.6;
+}
+
+.todo-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  border: 1px solid rgba(103, 189, 234, 0.35);
+  background: rgba(255, 255, 255, 0.88);
+  color: #12344d;
+  border-radius: 16px;
+  padding: 16px 18px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.todo-input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
+}
+
+.add-btn,
+.filter-btn,
+.clear-btn,
+.delete-btn {
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.add-btn {
+  padding: 0 22px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #fff;
+  font-weight: 600;
+}
+
+.add-btn:hover,
+.filter-btn:hover,
+.clear-btn:hover,
+.delete-btn:hover {
+  transform: translateY(-1px);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-btn,
+.clear-btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.76);
+  color: #215072;
+  border: 1px solid rgba(96, 165, 250, 0.18);
+}
+
+.filter-btn.active {
+  background: rgba(56, 189, 248, 0.18);
+  color: #0c4a6e;
+}
+
+.todo-list-wrap {
+  min-height: 280px;
+}
+
+.todo-list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.todo-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(125, 211, 252, 0.28);
+}
+
+.todo-item.completed .todo-text {
+  color: #6b8aa3;
+  text-decoration: line-through;
+}
+
+.todo-check {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkmark {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #38bdf8;
+  display: inline-block;
+  position: relative;
+}
+
+.todo-item.completed .checkmark {
+  background: linear-gradient(135deg, #22c55e, #14b8a6);
+}
+
+.todo-item.completed .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.todo-text {
+  word-break: break-word;
+  line-height: 1.5;
+  color: #12344d;
+}
+
+.delete-btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(251, 113, 133, 0.14);
+  color: #be123c;
+}
+
+.empty-state {
+  display: none;
+  min-height: 280px;
+  border: 1px dashed rgba(14, 165, 233, 0.25);
+  border-radius: 20px;
+  place-items: center;
+  text-align: center;
+  padding: 32px;
+  color: #4b7493;
+}
+
+.empty-state.show {
+  display: grid;
+}
+
+.empty-state h2 {
+  margin-bottom: 8px;
+  color: #0f3554;
+}
+
+.todo-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  color: #4b7493;
+  font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .todo-card {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .todo-form {
+    grid-template-columns: 1fr;
+  }
+
+  .add-btn {
+    min-height: 52px;
+  }
+
+  .toolbar,
+  .todo-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .todo-item {
+    grid-template-columns: auto 1fr;
+  }
+
+  .delete-btn {
+    grid-column: 1 / -1;
+  }
+}

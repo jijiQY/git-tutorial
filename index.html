@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo 应用</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <section class="todo-card">
+      <header class="hero">
+        <p class="hero-badge">Todo App</p>
+        <h1>今天要完成什么？</h1>
+        <p class="hero-subtitle">用一个简洁的待办页面安排任务，并自动保存在浏览器里。</p>
+      </header>
+
+      <form class="todo-form" id="todo-form">
+        <input
+          id="todo-input"
+          class="todo-input"
+          type="text"
+          placeholder="输入新的待办事项..."
+          maxlength="80"
+          autocomplete="off"
+        >
+        <button class="add-btn" type="submit">添加</button>
+      </form>
+
+      <section class="toolbar">
+        <div class="filters" id="filters">
+          <button class="filter-btn active" type="button" data-filter="all">全部</button>
+          <button class="filter-btn" type="button" data-filter="active">未完成</button>
+          <button class="filter-btn" type="button" data-filter="completed">已完成</button>
+        </div>
+        <button class="clear-btn" id="clear-completed" type="button">清除已完成</button>
+      </section>
+
+      <section class="todo-list-wrap">
+        <ul class="todo-list" id="todo-list"></ul>
+        <div class="empty-state" id="empty-state">
+          <h2>还没有待办事项</h2>
+          <p>先添加一个小目标，从第一件事开始。</p>
+        </div>
+      </section>
+
+      <footer class="todo-footer">
+        <span id="task-count">0 个任务</span>
+        <span id="task-progress">完成率 0%</span>
+      </footer>
+    </section>
+  </main>
+
+  <template id="todo-item-template">
+    <li class="todo-item">
+      <label class="todo-check">
+        <input type="checkbox" class="todo-toggle">
+        <span class="checkmark"></span>
+      </label>
+      <span class="todo-text"></span>
+      <button class="delete-btn" type="button" aria-label="删除任务">删除</button>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
